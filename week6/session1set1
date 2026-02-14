@@ -1,0 +1,78 @@
+# Problem Session 1: Set Version 1
+# Problem 1: Post Format Validator
+
+def is_valid_post_format(s):
+    stack=[]
+    d={
+        "(":")",
+        "{":"}",
+        "[":"]"
+    }
+    for a in s:
+        if a in d:
+            stack.append(a)
+        elif a not in d:
+            if stack and d[stack[-1]]==a:
+                stack.pop()
+            else:
+                return False
+    return not stack
+
+print(is_valid_post_format("()"))
+print(is_valid_post_format("()[]{}")) 
+print(is_valid_post_format("(]"))
+
+
+# Problem 3: Check Symmetry in Post Titles
+def is_symmetrical_title(title):
+  l =0
+  title =title.lower().replace(' ','')
+  r = len(title)-1
+  while l<=r:
+    if title[l] == title[r]:
+        l+=1
+        r-=1
+    else:
+        return False
+  return True
+
+print(is_symmetrical_title("A Santa at NASA"))
+print(is_symmetrical_title("Social Media")) 
+
+# Problem 5: Content Cleaner
+def clean_post(post):
+    stack=[]
+
+    for char in post:
+            if stack and stack[-1].lower() == char.lower() and stack[-1] != char:
+                stack.pop()
+            else:
+                stack.append(char)
+    return "".join(stack)
+
+
+print(clean_post("poOost")) 
+print(clean_post("abBAcC")) 
+print(clean_post("s")) 
+
+# Problem 7: Post Compare
+def post_compare(draft1, draft2):
+    stack=[]
+    for i in draft1:
+        if i !='#':
+            stack.append(i)
+        else:
+            if stack:
+                stack.pop()
+    stack2=[]
+    for i in draft2:
+        if i !='#':
+            stack2.append(i)
+        else:
+            if stack2:
+                stack2.pop()
+    return stack == stack2
+
+print(post_compare("ab#c", "ad#c"))
+print(post_compare("ab##", "c#d#")) 
+print(post_compare("a#c", "b")) 
