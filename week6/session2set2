@@ -1,0 +1,66 @@
+# Problem Session 2: Set Version 2
+# Problem 2: Find First Symmetrical Landmark Name
+def first_symmetrical_landmark(landmarks):
+	
+	for i in landmarks:
+		l=0
+		r=len(i)-1
+		sys = True
+		while l<=r:
+			if i[l]==i[r]:
+				l+=1
+				r-=1
+			else:
+				sys = False
+				break
+		if sys:
+			return i
+	return ''
+
+
+print(first_symmetrical_landmark(["canyon","forest","rotor","mountain"])) 
+print(first_symmetrical_landmark(["plateau","valley","cliff"])) 
+
+
+# Problem 4: Find the Expedition Log Concatenation Value
+def find_the_log_conc_val(logs):
+    sum = 0
+    l = 0
+    r = len(logs) - 1
+  
+    while l <= r:
+        if l < r:
+            val = str(logs[l]) + str(logs[r])
+            sum += int(val)
+        else:
+            sum += logs[l]   
+        l += 1
+        r -= 1
+        
+    return sum
+
+print(find_the_log_conc_val([7, 52, 2, 4])) 
+print(find_the_log_conc_val([5, 14, 13, 8, 12])) 
+
+# Problem 6: Count Balanced Terrain Subsections
+def count_balanced_terrain_subsections(terrain):
+    ls = []
+    if not terrain:
+        return 0
+        
+    count = 1
+    for i in range(1, len(terrain)):
+        if terrain[i] == terrain[i-1]:
+            count += 1
+        else:
+            ls.append(count)
+            count = 1
+    ls.append(count)
+    total = 0
+    for i in range(1, len(ls)):
+        total += min(ls[i], ls[i-1])
+        
+    return total	
+
+print(count_balanced_terrain_subsections("00110011")) 
+print(count_balanced_terrain_subsections("10101"))
